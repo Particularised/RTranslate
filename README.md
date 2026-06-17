@@ -32,6 +32,9 @@ python main.py
 ```
 
 `Ctrl + Alt + T`: Freeze the screen and draw a translation box. (Press again while open to start a new snip).
+
 `Click and Drag` the Dim Screen: Close the translation popup and return to Windows.
+
 `Esc`: Close the popup and return to Windows.
+
 `Ctrl + Alt + Q`: Completely shut down the application running in the background.
