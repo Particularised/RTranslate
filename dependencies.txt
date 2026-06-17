@@ -1,0 +1,7 @@
+PyQt6==6.6.1
+keyboard==0.13.5
+requests==2.31.0
+deepl==1.16.1
+pytesseract==0.3.10
+python-dotenv==1.0.1
+Pillow==10.2.0
