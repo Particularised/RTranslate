@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 
 ### Set up your API Key:
-[Get a API key from DeepL](https://www.deepl.com/en/pro/change-plan#api) (Any plan you want or is able to afford).
+[Get an API key from DeepL](https://www.deepl.com/en/pro/change-plan#api) (Any plan you want or is able to afford).
 Create a new file in the folder and name it exactly `.env` (the dot at the beginning is required).
 
 *(Note: A `.env` file is a hidden configuration file used to securely store private API keys so they don't accidentally get uploaded to public websites).*
