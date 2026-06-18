@@ -3,8 +3,6 @@ from PyQt6.QtCore import Qt, QPoint, QRect, QObject, pyqtSignal
 from PyQt6.QtGui import QPainter, QPen, QColor, QFont
 from PIL import ImageGrab
 import pytesseract
-import sys
-import keyboard
 from api import get_dictionary_data, translate_to_thai
 
 class TranslationPopup(QWidget):
@@ -51,12 +49,12 @@ class TranslationPopup(QWidget):
         self.layout.addWidget(self.footer_label)
         self.setLayout(self.layout)
         
-        # styling
+        # styling (Added padding-right to QLabel to act as a safety buffer)
         self.setStyleSheet("""
             QWidget { background-color: #2b2b2b; color: #ffffff; border-radius: 8px; border: 1px solid #444; }
             QPushButton#TranslateBtn { background-color: #3b82f6; color: white; padding: 8px; border-radius: 5px; font-weight: bold; border: none; margin-top: 10px;}
             QPushButton#TranslateBtn:hover { background-color: #2563eb; }
-            QLabel { border: none; }
+            QLabel { border: none; padding-right: 5px; } 
         """)
         self.toggle_btn.setObjectName("TranslateBtn") 
         
@@ -131,14 +129,14 @@ class TranslationPopup(QWidget):
         self.def_label.setMinimumWidth(10)
         self.synonym_label.setMinimumWidth(10)
 
-        # 2. Release any fixed width limits
+        # 2. Release any fixed width limits (INCREASED MAX WIDTH TO 800)
         self.setMinimumWidth(300)
-        self.setMaximumWidth(450)
+        self.setMaximumWidth(800)
         
         # 3. Collapse the window mathematically (forces a layout refresh)
         self.resize(1, 1)
         
-        # 4. Let PyQt expand it naturally up to the 450px limit
+        # 4. Let PyQt expand it naturally up to the new 800px limit
         self.adjustSize()
         
         # 5. Lock the final width so the UI feels solid
@@ -221,7 +219,7 @@ class SnippingCanvas(QWidget):
         if not self.is_drawing and not self.popup.isVisible():
             painter.setPen(QPen(QColor(255, 255, 255, 120)))
             painter.setFont(QFont("Segoe UI", 24, QFont.Weight.Bold))
-            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, "Draw a box to translate\nPress [Esc] to cancel\nPress [Ctrl+Alt+Q] to close the program entirely")
+            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, "Draw a box to translate\nPress [Esc] to cancel")
         if self.is_drawing:
             pen = QPen(QColor(255, 255, 255), 2)
             painter.setPen(pen)
