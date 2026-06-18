@@ -1,13 +1,31 @@
 import os
+import sys
 import requests
 import deepl
 import pytesseract
 from dotenv import load_dotenv
 
-# load
-load_dotenv()
-pytesseract.pytesseract.tesseract_cmd = r'.\Tesseract-OCR\tesseract.exe'
+def get_tesseract_path():
+    if getattr(sys, 'frozen', False):
+        # pyinstaller
+        base_path = os.path.dirname(sys.executable)
+    else:
+        # normal script
+        base_path = os.path.dirname(os.path.abspath(__file__))
+        
+    return os.path.join(base_path, "Tesseract-OCR", "tesseract.exe")
 
+# load environment variables
+load_dotenv()
+tesseract_exe = get_tesseract_path()
+
+if not os.path.exists(tesseract_exe):
+    raise FileNotFoundError(
+        f"Tesseract not found at: {tesseract_exe}\n"
+        "Please ensure the 'Tesseract-OCR' folder is in the exact same directory as this program."
+    )
+
+pytesseract.pytesseract.tesseract_cmd = tesseract_exe
 # fetch key
 DEEPL_API_KEY = os.getenv("DEEPL_API_KEY")
 
