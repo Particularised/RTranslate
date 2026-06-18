@@ -219,7 +219,7 @@ class SnippingCanvas(QWidget):
         if not self.is_drawing and not self.popup.isVisible():
             painter.setPen(QPen(QColor(255, 255, 255, 120)))
             painter.setFont(QFont("Segoe UI", 24, QFont.Weight.Bold))
-            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, "Draw a box to translate\nPress [Esc] to cancel")
+            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, "Draw a box to translate\nPress [Esc] to cancel\nPress [Ctrl+Alt+Q] to close the program entirely.")
         if self.is_drawing:
             pen = QPen(QColor(255, 255, 255), 2)
             painter.setPen(pen)
