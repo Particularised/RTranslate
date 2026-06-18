@@ -15,7 +15,7 @@ Because this app relies on DeepL's translation servers, you will need your own A
 2. Open the extracted `RTranslate` folder and double-click **`RTranslate.exe`**.
 3. A popup will appear letting you know it generated a file called `api_key.txt`. 
 4. Open `api_key.txt` with Notepad, paste your DeepL API key inside, and save it.
-5. Run **`RTranslate.exe`** again! 
+5. Run **`RTranslate.exe`** again. 
 
 *(Note: If your key is correct, you will get a welcome popup confirming the app is running in the background).*
 
