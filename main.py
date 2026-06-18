@@ -1,6 +1,8 @@
 import sys
+import os
 import signal
 import keyboard
+import ctypes
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QObject, pyqtSignal
 from ui import TranslationPopup, SnippingCanvas
@@ -8,16 +10,20 @@ from ui import TranslationPopup, SnippingCanvas
 # signal emitter
 class HotkeySignaler(QObject):
     show_canvas_signal = pyqtSignal()
+    quit_signal = pyqtSignal()
 
 # temporary quit
 def quit_program():
     print("Shutting down Snipping Translator...")
     keyboard.unhook_all() # stop keyboard
     QApplication.instance().quit() # stop pyqt gui
-    sys.exit(0)
+    os._exit(0)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+    
+    app.setQuitOnLastWindowClosed(False) 
+    
     signal.signal(signal.SIGINT, signal.SIG_DFL) 
     
     popup = TranslationPopup()
@@ -26,13 +32,24 @@ if __name__ == '__main__':
 
     # connect gui to signaler
     signaler.show_canvas_signal.connect(canvas.activate_canvas)
+    signaler.quit_signal.connect(quit_program)
 
     # emit signal when the key is pressed
     keyboard.add_hotkey('ctrl+alt+t', signaler.show_canvas_signal.emit)
-    keyboard.add_hotkey('ctrl+alt+q', quit_program)
+    keyboard.add_hotkey('ctrl+alt+q', signaler.quit_signal.emit)
     
-    print("RTranslator is running.")
-    print("Press Ctrl+Alt+T to start snipping, Ctrl+Alt+Q to close the program entirely.")
+    print("RTranslator is running in the background.")
+    
+    # welcome
+    welcome_message = (
+        "RTranslate is now running in the background!\n\n"
+        "Here are your controls:\n"
+        "• [Ctrl + Alt + T] : Draw a box to translate text\n"
+        "• [Esc] : Close the translation popup or cancel a snip\n"
+        "• [Ctrl + Alt + Q] : Completely shut down the program"
+    )
+
+    ctypes.windll.user32.MessageBoxW(0, welcome_message, "RTranslate Started", 64)
     
     # start (return 0 or 1)
     sys.exit(app.exec())

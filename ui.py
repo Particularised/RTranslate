@@ -3,7 +3,9 @@ from PyQt6.QtCore import Qt, QPoint, QRect, QObject, pyqtSignal
 from PyQt6.QtGui import QPainter, QPen, QColor, QFont
 from PIL import ImageGrab
 import pytesseract
-from dict import get_dictionary_data, translate_to_thai
+import sys
+import keyboard
+from api import get_dictionary_data, translate_to_thai
 
 class TranslationPopup(QWidget):
     def __init__(self):
@@ -219,7 +221,7 @@ class SnippingCanvas(QWidget):
         if not self.is_drawing and not self.popup.isVisible():
             painter.setPen(QPen(QColor(255, 255, 255, 120)))
             painter.setFont(QFont("Segoe UI", 24, QFont.Weight.Bold))
-            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, "Draw a box to translate\nPress [Esc] to cancel")
+            painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, "Draw a box to translate\nPress [Esc] to cancel\nPress [Ctrl+Alt+Q] to close the program entirely")
         if self.is_drawing:
             pen = QPen(QColor(255, 255, 255), 2)
             painter.setPen(pen)
