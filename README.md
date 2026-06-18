@@ -1,5 +1,5 @@
 # RTranslate
-> Translate any word or sentence in real time on your screen with OCR and DeepL API. Primarily for reading documents, articles, novels/visual novels. Unfortunately, only EN to TH is available as of now because I initially intended this to be used for personal purposes. I'll update later if I got time. (UI are vibe coded so expect inconsistencies)
+> Translate any word or sentence in real time on your screen with OCR and DeepL API. Primarily for reading documents, articles, novels/visual novels. Unfortunately, only EN to TH is available as of now because I initially intended this to be used for personal purposes.
 
 ## Download (No Installation Required)
 You do not need to install Python or use a terminal to run this app. 
